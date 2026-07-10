@@ -21,6 +21,15 @@ def find_score(name, data):
 def home():
     return "Nexurus Bottleneck Calculator API is running!"
 
+@app.route("/cpus")
+def get_cpus():
+    return jsonify(list(cpus.keys()))
+
+
+@app.route("/gpus")
+def get_gpus():
+    return jsonify(list(gpus.keys()))
+
 @app.route("/calculate", methods=["POST"])
 def calculate():
     data = request.json
