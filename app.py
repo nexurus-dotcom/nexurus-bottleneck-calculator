@@ -1,4 +1,3 @@
-from flask_cors import CORS
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import json
@@ -17,6 +16,10 @@ def find_score(name, data):
         if name.lower() in item_name.lower():
             return score
     return None
+
+@app.route('/')
+def home():
+    return "Nexurus Bottleneck Calculator API is running!"
 
 @app.route("/calculate", methods=["POST"])
 def calculate():
@@ -47,4 +50,4 @@ def calculate():
     })
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()
