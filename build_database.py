@@ -114,6 +114,7 @@ gpus = {
     "NVIDIA RTX 3070": 42.8,
     "NVIDIA RTX 3060 Ti": 36.4,
     "NVIDIA RTX 3060 12GB": 30.2,
+    "NVIDIA RTX 3060 8GB": 28,
 
 
     # NVIDIA RTX 20 Series
@@ -127,16 +128,33 @@ gpus = {
     "NVIDIA RTX 2060": 25,
 
 
-    # NVIDIA GTX
+    # NVIDIA GTX 10 Series
 
-    "NVIDIA GTX 1660 Ti": 22,
-    "NVIDIA GTX 1660 Super": 21,
-    "NVIDIA GTX 1660": 20,
     "NVIDIA GTX 1080 Ti": 35,
     "NVIDIA GTX 1080": 30,
     "NVIDIA GTX 1070 Ti": 25,
     "NVIDIA GTX 1070": 22,
     "NVIDIA GTX 1060 6GB": 18,
+    "NVIDIA GTX 1060 3GB": 15,
+
+
+    # NVIDIA GTX 16 Series
+
+    "NVIDIA GTX 1660 Ti": 22,
+    "NVIDIA GTX 1660 Super": 21,
+    "NVIDIA GTX 1660": 20,
+
+
+    # NVIDIA GTX 900 Series
+
+    "NVIDIA GTX 980 Ti": 22,
+    "NVIDIA GTX 980": 18,
+    "NVIDIA GTX 970": 16,
+
+
+    # NVIDIA RTX 30 Entry
+
+    "NVIDIA RTX 3050 8GB": 21.9,
 
 
     # AMD RX 9000 Series
@@ -170,11 +188,13 @@ gpus = {
     "AMD RX 6600": 25.5,
 
 
-    # Older AMD
+    # Older AMD RX
 
     "AMD RX 5700 XT": 35,
     "AMD RX 5700": 30,
     "AMD RX 5600 XT": 25,
+    "AMD RX 5500 XT": 20,
+    "AMD RX 590": 18,
     "AMD RX 580": 15,
 
 
