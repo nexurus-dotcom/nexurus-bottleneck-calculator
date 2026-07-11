@@ -70,3 +70,13 @@ def calculate():
 
 if __name__ == "__main__":
     app.run()
+    @app.route("/upgrades", methods=["POST"])
+def get_upgrades():
+    data = request.json
+    gpu = data.get("gpu")
+
+    upgrades = gpu_upgrades.get(gpu, [])
+
+    return jsonify({
+        "upgrades": upgrades
+    })
