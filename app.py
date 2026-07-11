@@ -67,20 +67,30 @@ def calculate():
         "ratio": ratio,
         "result": result
     })
+def clean_name(text):
+    return (
+        text.lower()
+        .replace("nvidia", "")
+        .replace("amd", "")
+        .replace("geforce", "")
+        .replace("radeon", "")
+        .strip()
+    )
+
+
 @app.route("/upgrades", methods=["POST"])
 def get_upgrades():
     data = request.json
-    gpu_input = data.get("gpu", "").lower()
+    gpu_input = data.get("gpu", "")
 
     upgrades = []
 
-def clean_name(text):
-    return text.lower().replace("nvidia", "").replace("amd", "").replace("geforce", "").strip()
+    cleaned_input = clean_name(gpu_input)
 
-for gpu_name in gpu_upgrades:
-    if normalize(gpu_input) in normalize(gpu_name):
-        upgrades = gpu_upgrades[gpu_name]
-        break
+    for gpu_name in gpu_upgrades:
+        if clean_name(gpu_name) in cleaned_input or cleaned_input in clean_name(gpu_name):
+            upgrades = gpu_upgrades[gpu_name]
+            break
 
     return jsonify({
         "upgrades": upgrades
