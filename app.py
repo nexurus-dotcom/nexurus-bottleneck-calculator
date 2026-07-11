@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-from upgrade_database import gpu_upgrades
+from upgrade_database import gpu_upgrades, cpu_upgrades
 from flask_cors import CORS
 import json
 
@@ -90,6 +90,24 @@ def get_upgrades():
     for gpu_name in gpu_upgrades:
         if clean_name(gpu_name) in cleaned_input or cleaned_input in clean_name(gpu_name):
             upgrades = gpu_upgrades[gpu_name]
+            break
+
+    return jsonify({
+        "upgrades": upgrades
+    })
+
+@app.route("/cpu-upgrades", methods=["POST"])
+def get_cpu_upgrades():
+    data = request.json
+    cpu_input = data.get("cpu", "")
+
+    upgrades = []
+
+    cleaned_input = clean_name(cpu_input)
+
+    for cpu_name in cpu_upgrades:
+        if clean_name(cpu_name) in cleaned_input or cleaned_input in clean_name(cpu_name):
+            upgrades = cpu_upgrades[cpu_name]
             break
 
     return jsonify({
