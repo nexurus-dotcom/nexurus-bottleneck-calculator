@@ -67,16 +67,27 @@ def calculate():
         "ratio": ratio,
         "result": result
     })
-def clean_name(text):
+
+def clean_gpu_name(text):
     return (
         text.lower()
         .replace("nvidia", "")
         .replace("amd", "")
         .replace("geforce", "")
         .replace("radeon", "")
+        .replace("graphics card", "")
         .strip()
     )
 
+
+def clean_cpu_name(text):
+    return (
+        text.lower()
+        .replace("amd", "")
+        .replace("intel", "")
+        .replace("processor", "")
+        .strip()
+    )
 
 @app.route("/upgrades", methods=["POST"])
 def get_upgrades():
@@ -85,10 +96,10 @@ def get_upgrades():
 
     upgrades = []
 
-    cleaned_input = clean_name(gpu_input)
+    cleaned_input = clean_gpu_name(gpu_input)
 
     for gpu_name in gpu_upgrades:
-        if clean_name(gpu_name) in cleaned_input or cleaned_input in clean_name(gpu_name):
+        if clean_gpu_name(gpu_name) in cleaned_input or cleaned_input in clean_gpu_name(gpu_name):
             upgrades = gpu_upgrades[gpu_name]
             break
 
@@ -103,10 +114,10 @@ def get_cpu_upgrades():
 
     upgrades = []
 
-    cleaned_input = clean_name(cpu_input)
+    cleaned_input = clean_cpu_name(cpu_input)
 
     for cpu_name in cpu_upgrades:
-        if clean_name(cpu_name) in cleaned_input or cleaned_input in clean_name(cpu_name):
+        if clean_cpu_name(cpu_name) in cleaned_input or cleaned_input in clean_cpu_name(cpu_name):
             upgrades = cpu_upgrades[cpu_name]
             break
 
