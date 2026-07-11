@@ -74,7 +74,7 @@ def get_upgrades():
 
     upgrades = []
 
-   def clean_name(text):
+def clean_name(text):
     return text.lower().replace("nvidia", "").replace("amd", "").replace("geforce", "").strip()
 
 for gpu_name in gpu_upgrades:
