@@ -91,9 +91,7 @@ def clean_cpu_name(text):
 
 @app.route("/upgrades", methods=["POST"])
 def get_upgrades():
-    print("GPU UPGRADE ROUTE USED")
-    print("GPU DATABASE:", gpu_upgrades)
-
+   
     data = request.json
     gpu_input = data.get("gpu", "")
 
