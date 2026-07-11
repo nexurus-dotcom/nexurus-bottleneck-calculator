@@ -67,20 +67,6 @@ def calculate():
         "ratio": ratio,
         "result": result
     })
-
-if __name__ == "__main__":
-    app.run()
-    @app.route("/upgrades", methods=["POST"])
-def get_upgrades():
-    data = request.json
-    gpu = data.get("gpu")
-
-    upgrades = gpu_upgrades.get(gpu, [])
-
-    return jsonify({
-        "upgrades": upgrades
-    })
-
 @app.route("/upgrades", methods=["POST"])
 def get_upgrades():
     data = request.json
@@ -91,3 +77,6 @@ def get_upgrades():
     return jsonify({
         "upgrades": upgrades
     })
+
+if __name__ == "__main__":
+    app.run()
