@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+from upgrade_database import gpu_upgrades
 from flask_cors import CORS
 import json
 
