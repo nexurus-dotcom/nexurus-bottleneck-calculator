@@ -126,5 +126,57 @@ def get_cpu_upgrades():
         "upgrades": upgrades
     })
 
+@app.route("/recommendations", methods=["POST"])
+def recommendations():
+    data = request.json
+
+    cpu_name = data.get("cpu", "")
+    gpu_name = data.get("gpu", "")
+
+    cpu_score = find_score(cpu_name, cpus)
+    gpu_score = find_score(gpu_name, gpus)
+
+    if not cpu_score or not gpu_score:
+        return jsonify({
+            "error": "Part not found"
+        }), 400
+
+    difference = cpu_score - gpu_score
+
+    if abs(difference) <= 25:
+        result = "Balanced"
+        recommendation_type = "None"
+        upgrades = []
+
+    elif difference > 25:
+        result = "GPU bottleneck"
+        recommendation_type = "GPU"
+
+        cleaned_input = clean_gpu_name(gpu_name)
+        upgrades = []
+
+        for gpu in gpu_upgrades:
+            if clean_gpu_name(gpu) in cleaned_input or cleaned_input in clean_gpu_name(gpu):
+                upgrades = gpu_upgrades[gpu]
+                break
+
+    else:
+        result = "CPU bottleneck"
+        recommendation_type = "CPU"
+
+        cleaned_input = clean_cpu_name(cpu_name)
+        upgrades = []
+
+        for cpu in cpu_upgrades:
+            if clean_cpu_name(cpu) in cleaned_input or cleaned_input in clean_cpu_name(cpu):
+                upgrades = cpu_upgrades[cpu]
+                break
+
+    return jsonify({
+        "result": result,
+        "recommendation_type": recommendation_type,
+        "upgrades": upgrades
+    })
+
 if __name__ == "__main__":
     app.run()
