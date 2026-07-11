@@ -80,3 +80,14 @@ def get_upgrades():
     return jsonify({
         "upgrades": upgrades
     })
+
+@app.route("/upgrades", methods=["POST"])
+def get_upgrades():
+    data = request.json
+    gpu = data.get("gpu")
+
+    upgrades = gpu_upgrades.get(gpu, [])
+
+    return jsonify({
+        "upgrades": upgrades
+    })
