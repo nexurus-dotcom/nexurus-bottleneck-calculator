@@ -5,37 +5,73 @@ import json
 
 cpus = {
 
-    "AMD Ryzen 7 9850X3D": 100,
-    "AMD Ryzen 7 9800X3D": 97,
-    "AMD Ryzen 9 9950X3D": 95.7,
-    "AMD Ryzen 9 9900X3D": 86.9,
-    "AMD Ryzen 7 7800X3D": 85.6,
-    "AMD Ryzen 9 7950X3D": 83.9,
-    "AMD Ryzen 5 7600X3D": 80.6,
-    "Intel Core i9-14900K": 78.2,
-    "Intel Core Ultra 7 270K Plus": 77.5,
-    "AMD Ryzen 7 7900X3D": 77.1,
-    "AMD Ryzen 9 9950X": 76.9,
-    "Intel Core i9-13900K": 76.8,
-    "Intel Core i7-14700K": 76.4,
-    "Intel Core i7-13700K": 75.8,
-    "AMD Ryzen 9 9900X": 73.9,
-    "Intel Core Ultra 5 250K Plus": 73.3,
-    "Intel Core i5-14600K": 72.8,
-    "AMD Ryzen 5 9600X": 72.6,
-    "Intel Core Ultra 9 285K": 71.8,
-    "AMD Ryzen 9 7950X": 71,
-    "Intel Core i5-13600K": 70.9,
-    "AMD Ryzen 7 7700X": 70.6,
-    "Intel Core Ultra 7 265K": 70.3,
-    "AMD Ryzen 9 7900X": 69.2,
-    "AMD Ryzen 5 7600X": 67.3,
-    "Intel Core Ultra 5 245K": 67.1,
-    "Intel Core i7-12700K": 65.8,
-    "Intel Core Ultra 5 225": 62.5,
-    "Intel Core i5-12600K": 60.8,
-    "Intel Core i5-14400": 58
+    # AMD Ryzen
 
+    "AMD Ryzen 5 3600": 45,
+    "AMD Ryzen 5 5600": 55,
+    "AMD Ryzen 5 5600X": 57,
+    "AMD Ryzen 5 7600": 65,
+    "AMD Ryzen 5 7600X": 67.3,
+    "AMD Ryzen 5 7600X3D": 80.6,
+    "AMD Ryzen 5 9600X": 72.6,
+
+    "AMD Ryzen 7 3700X": 50,
+    "AMD Ryzen 7 5700X": 62,
+    "AMD Ryzen 7 5800X": 70,
+    "AMD Ryzen 7 5800X3D": 82,
+    "AMD Ryzen 7 7700X": 70.6,
+    "AMD Ryzen 7 7800X3D": 85.6,
+    "AMD Ryzen 7 9800X3D": 97,
+    "AMD Ryzen 7 9850X3D": 100,
+
+    "AMD Ryzen 9 5900X": 68,
+    "AMD Ryzen 9 5950X": 70,
+    "AMD Ryzen 9 7900X": 69.2,
+    "AMD Ryzen 9 7900X3D": 77.1,
+    "AMD Ryzen 9 7950X": 71,
+    "AMD Ryzen 9 7950X3D": 83.9,
+    "AMD Ryzen 9 9900X": 73.9,
+    "AMD Ryzen 9 9900X3D": 86.9,
+    "AMD Ryzen 9 9950X": 76.9,
+    "AMD Ryzen 9 9950X3D": 95.7,
+
+
+    # Intel Core
+
+    "Intel Core i5-10400": 45,
+    "Intel Core i5-10600K": 52,
+    "Intel Core i5-11400": 50,
+    "Intel Core i5-11600K": 55,
+
+    "Intel Core i5-12400": 58,
+    "Intel Core i5-12600K": 60.8,
+    "Intel Core i5-13400": 62,
+    "Intel Core i5-13600K": 70.9,
+    "Intel Core i5-14400": 58,
+    "Intel Core i5-14600K": 72.8,
+
+    "Intel Core i7-10700K": 55,
+    "Intel Core i7-11700K": 60,
+    "Intel Core i7-12700K": 65.8,
+    "Intel Core i7-13700K": 75.8,
+    "Intel Core i7-14700K": 76.4,
+
+    "Intel Core i9-10900K": 62,
+    "Intel Core i9-11900K": 63,
+    "Intel Core i9-12900K": 70,
+    "Intel Core i9-13900K": 76.8,
+    "Intel Core i9-14900K": 78.2,
+
+    # Intel Core Ultra
+
+    "Intel Core Ultra 5 225": 62.5,
+    "Intel Core Ultra 5 245K": 67.1,
+    "Intel Core Ultra 5 250K Plus": 73.3,
+
+    "Intel Core Ultra 7 265K": 70.3,
+    "Intel Core Ultra 7 270K Plus": 77.5,
+
+    "Intel Core Ultra 9 285K": 71.8
 }
 
 # Gaming GPU performance index

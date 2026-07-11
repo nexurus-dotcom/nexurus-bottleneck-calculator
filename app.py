@@ -54,7 +54,7 @@ def calculate():
     return jsonify({
         "cpu_score": cpu_score,
         "gpu_score": gpu_score,
-        "ratio": ratio,
+        "ratio": round(ratio, 2),
         "result": result
     })
 
