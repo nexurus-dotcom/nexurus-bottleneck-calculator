@@ -70,9 +70,14 @@ def calculate():
 @app.route("/upgrades", methods=["POST"])
 def get_upgrades():
     data = request.json
-    gpu = data.get("gpu")
+    gpu_input = data.get("gpu", "").lower()
 
-    upgrades = gpu_upgrades.get(gpu, [])
+    upgrades = []
+
+    for gpu_name in gpu_upgrades:
+        if gpu_input in gpu_name.lower():
+            upgrades = gpu_upgrades[gpu_name]
+            break
 
     return jsonify({
         "upgrades": upgrades
