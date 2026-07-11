@@ -46,17 +46,17 @@ def calculate():
     difference = cpu_score - gpu_score
 
     # Determine bottleneck
-    if abs(difference) <= 15:
-        result = "Balanced"
+    if abs(difference) <= 25:
+    result = "Balanced"
 
-    elif difference > 15:
-        result = "GPU bottleneck"
+elif difference > 25:
+    result = "GPU bottleneck"
 
-    else:
-        result = "CPU bottleneck"
+else:
+    result = "CPU bottleneck"
 
     # Match percentage
-    match = max(0, 100 - abs(difference) * 2)
+    match = max(0, 100 - abs(difference))
 
     ratio = round(match / 100, 2)
 
