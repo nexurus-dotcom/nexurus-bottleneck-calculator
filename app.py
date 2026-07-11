@@ -42,14 +42,23 @@ def calculate():
     if not cpu_score or not gpu_score:
         return jsonify({"error": "Part not found"}), 400
 
-    ratio = cpu_score / gpu_score
+       # Compare CPU and GPU performance difference
+    difference = cpu_score - gpu_score
 
-    if ratio < 0.8:
-        result = "CPU bottleneck"
-    elif ratio > 1.2:
-        result = "GPU bottleneck"
-    else:
+    # Determine bottleneck
+    if abs(difference) <= 15:
         result = "Balanced"
+
+    elif difference > 15:
+        result = "GPU bottleneck"
+
+    else:
+        result = "CPU bottleneck"
+
+    # Match percentage
+    match = max(0, 100 - abs(difference) * 2)
+
+    ratio = round(match / 100, 2)
 
     return jsonify({
         "cpu_score": cpu_score,
