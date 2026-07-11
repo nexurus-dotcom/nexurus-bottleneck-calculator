@@ -74,10 +74,13 @@ def get_upgrades():
 
     upgrades = []
 
-    for gpu_name in gpu_upgrades:
-        if gpu_input in gpu_name.lower():
-            upgrades = gpu_upgrades[gpu_name]
-            break
+    def normalize(text):
+    return text.lower().replace("nvidia", "").replace("amd", "").replace("geforce", "").strip()
+
+for gpu_name in gpu_upgrades:
+    if normalize(gpu_input) in normalize(gpu_name):
+        upgrades = gpu_upgrades[gpu_name]
+        break
 
     return jsonify({
         "upgrades": upgrades
