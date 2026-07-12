@@ -34,7 +34,9 @@ def get_gpus():
 
 @app.route("/calculate", methods=["POST"])
 def calculate():
+
     data = request.json
+
     cpu_name = data.get("cpu")
     gpu_name = data.get("gpu")
 
@@ -44,24 +46,30 @@ def calculate():
     if not cpu_score or not gpu_score:
         return jsonify({"error": "Part not found"}), 400
 
-   difference = cpu_score - gpu_score
 
-# normalize difference (fixes accuracy)
-percent_diff = abs(difference) / max(cpu_score, gpu_score)
+    difference = cpu_score - gpu_score
 
-# Determine bottleneck more realistically
-if percent_diff < 0.15:
-    result = "Balanced"
 
-elif difference > 0:
-    result = "GPU bottleneck"
+    # Percentage difference between components
+    percent_diff = abs(difference) / max(cpu_score, gpu_score)
 
-else:
-    result = "CPU bottleneck"
 
-# Better match score
-match = max(0, 100 - (percent_diff * 100))
-ratio = round(match / 100, 2)
+    # Determine bottleneck
+    if percent_diff < 0.15:
+        result = "Balanced"
+
+    elif difference > 0:
+        result = "GPU bottleneck"
+
+    else:
+        result = "CPU bottleneck"
+
+
+    # Match percentage
+    match = max(0, 100 - (percent_diff * 100))
+
+    ratio = round(match / 100, 2)
+
 
     return jsonify({
         "cpu_score": cpu_score,
@@ -145,6 +153,7 @@ def get_cpu_upgrades():
 
 @app.route("/recommendations", methods=["POST"])
 def recommendations():
+
     data = request.json
 
     cpu_name = data.get("cpu", "")
@@ -158,94 +167,112 @@ def recommendations():
             "error": "Part not found"
         }), 400
 
+
     difference = cpu_score - gpu_score
 
-# lowered threshold for normalized scoring
-if abs(difference) <= 10:
-    result = "Balanced"
-    recommendation_type = "None"
     upgrades = []
 
-elif difference > 10:
-    result = "GPU bottleneck"
-    recommendation_type = "GPU"
 
-    cleaned_input = clean_gpu_name(gpu_name)
-    upgrades = []
+    # Balanced
+    if abs(difference) <= 10:
 
-    for gpu in gpu_upgrades:
-
-    database_gpu = clean_gpu_name(gpu)
-
-    if database_gpu in cleaned_input or cleaned_input in database_gpu:
-        upgrades = gpu_upgrades[gpu]
-        break
+        result = "Balanced"
+        recommendation_type = "None"
 
 
-# fallback - closest stronger GPU
-if not upgrades:
+    # GPU is stronger than CPU = CPU bottleneck
+    elif difference < 0:
 
-    gpu_score = find_score(gpu_name, gpus)
+        result = "CPU bottleneck"
+        recommendation_type = "CPU"
 
-    closest_gpu = None
-    closest_difference = 999
-
-
-    for gpu in gpus:
-
-        difference = gpus[gpu] - gpu_score
-
-        if difference > 0 and difference < closest_difference:
-            closest_difference = difference
-            closest_gpu = gpu
+        cleaned_input = clean_cpu_name(cpu_name)
 
 
-    if closest_gpu:
-        upgrades = [
-            closest_gpu
-        ]
+        for cpu in cpu_upgrades:
 
-else:
-    result = "CPU bottleneck"
-    recommendation_type = "CPU"
+            database_cpu = clean_cpu_name(cpu)
 
-    cleaned_input = clean_cpu_name(cpu_name)
-    upgrades = []
+            if database_cpu in cleaned_input or cleaned_input in database_cpu:
 
-   for cpu in cpu_upgrades:
-    database_cpu = clean_cpu_name(cpu)
-
-    if database_cpu in cleaned_input or cleaned_input in database_cpu:
-        upgrades = cpu_upgrades[cpu]
-        break
+                upgrades = cpu_upgrades[cpu]
+                break
 
 
-# fallback - use closest CPU upgrade path
-if not upgrades:
 
-    cpu_score = find_score(cpu_name, cpus)
+        # fallback closest CPU
+        if not upgrades:
 
-    closest_cpu = None
-    closest_difference = 999
-
-    for cpu in cpus:
-
-        difference = cpus[cpu] - cpu_score
-
-        if difference > 0 and difference < closest_difference:
-            closest_difference = difference
-            closest_cpu = cpu
+            closest_cpu = None
+            closest_difference = 999
 
 
-    if closest_cpu:
-        upgrades = [
-            closest_cpu
-        ]
+            for cpu in cpus:
+
+                upgrade_difference = cpus[cpu] - cpu_score
+
+                if upgrade_difference > 0 and upgrade_difference < closest_difference:
+
+                    closest_difference = upgrade_difference
+                    closest_cpu = cpu
+
+
+            if closest_cpu:
+                upgrades = [closest_cpu]
+
+
+
+    # CPU is stronger than GPU = GPU bottleneck
+    else:
+
+        result = "GPU bottleneck"
+        recommendation_type = "GPU"
+
+        cleaned_input = clean_gpu_name(gpu_name)
+
+
+        for gpu in gpu_upgrades:
+
+            database_gpu = clean_gpu_name(gpu)
+
+            if database_gpu in cleaned_input or cleaned_input in database_gpu:
+
+                upgrades = gpu_upgrades[gpu]
+                break
+
+
+
+        # fallback closest GPU
+        if not upgrades:
+
+            closest_gpu = None
+            closest_difference = 999
+
+
+            for gpu in gpus:
+
+                upgrade_difference = gpus[gpu] - gpu_score
+
+
+                if upgrade_difference > 0 and upgrade_difference < closest_difference:
+
+                    closest_difference = upgrade_difference
+                    closest_gpu = gpu
+
+
+            if closest_gpu:
+                upgrades = [closest_gpu]
+
+
 
     return jsonify({
+
         "result": result,
+
         "recommendation_type": recommendation_type,
+
         "upgrades": upgrades
+
     })
 
 if __name__ == "__main__":
