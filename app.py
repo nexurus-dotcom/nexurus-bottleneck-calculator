@@ -170,7 +170,7 @@ else:
     upgrades = []
 
     for cpu in cpu_upgrades:
-        if clean_cpu_name(cpu) in cleaned_input or cleaned_input in clean_cpu_name(cpu):
+        if clean_cpu_name(cpu) == cleaned_input:
             upgrades = cpu_upgrades[cpu]
             break
 
