@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify
 from upgrade_database import gpu_upgrades, cpu_upgrades
 from flask_cors import CORS
 import json
+from difflib import get_close_matches
 
 app = Flask(__name__)
 CORS(app)
@@ -82,11 +83,26 @@ def clean_gpu_name(text):
 
 
 def clean_cpu_name(text):
+    text = text.lower()
+
+    replacements = [
+        "amd",
+        "intel",
+        "processor",
+        "cpu",
+        "core",
+        "ryzen",
+        "™",
+        "®"
+    ]
+
+    for item in replacements:
+        text = text.replace(item, "")
+
     return (
-        text.lower()
-        .replace("amd", "")
-        .replace("intel", "")
-        .replace("processor", "")
+        text
+        .replace(" ", "")
+        .replace("-", "")
         .strip()
     )
 
@@ -158,9 +174,36 @@ elif difference > 10:
     upgrades = []
 
     for gpu in gpu_upgrades:
-        if clean_gpu_name(gpu) in cleaned_input or cleaned_input in clean_gpu_name(gpu):
-            upgrades = gpu_upgrades[gpu]
-            break
+
+    database_gpu = clean_gpu_name(gpu)
+
+    if database_gpu in cleaned_input or cleaned_input in database_gpu:
+        upgrades = gpu_upgrades[gpu]
+        break
+
+
+# fallback - closest stronger GPU
+if not upgrades:
+
+    gpu_score = find_score(gpu_name, gpus)
+
+    closest_gpu = None
+    closest_difference = 999
+
+
+    for gpu in gpus:
+
+        difference = gpus[gpu] - gpu_score
+
+        if difference > 0 and difference < closest_difference:
+            closest_difference = difference
+            closest_gpu = gpu
+
+
+    if closest_gpu:
+        upgrades = [
+            closest_gpu
+        ]
 
 else:
     result = "CPU bottleneck"
@@ -169,10 +212,35 @@ else:
     cleaned_input = clean_cpu_name(cpu_name)
     upgrades = []
 
-    for cpu in cpu_upgrades:
-        if clean_cpu_name(cpu) == cleaned_input:
-            upgrades = cpu_upgrades[cpu]
-            break
+   for cpu in cpu_upgrades:
+    database_cpu = clean_cpu_name(cpu)
+
+    if database_cpu in cleaned_input or cleaned_input in database_cpu:
+        upgrades = cpu_upgrades[cpu]
+        break
+
+
+# fallback - use closest CPU upgrade path
+if not upgrades:
+
+    cpu_score = find_score(cpu_name, cpus)
+
+    closest_cpu = None
+    closest_difference = 999
+
+    for cpu in cpus:
+
+        difference = cpus[cpu] - cpu_score
+
+        if difference > 0 and difference < closest_difference:
+            closest_difference = difference
+            closest_cpu = cpu
+
+
+    if closest_cpu:
+        upgrades = [
+            closest_cpu
+        ]
 
     return jsonify({
         "result": result,
