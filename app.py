@@ -144,34 +144,35 @@ def recommendations():
 
     difference = cpu_score - gpu_score
 
-    if abs(difference) <= 25:
-        result = "Balanced"
-        recommendation_type = "None"
-        upgrades = []
+# lowered threshold for normalized scoring
+if abs(difference) <= 10:
+    result = "Balanced"
+    recommendation_type = "None"
+    upgrades = []
 
-    elif difference > 25:
-        result = "GPU bottleneck"
-        recommendation_type = "GPU"
+elif difference > 10:
+    result = "GPU bottleneck"
+    recommendation_type = "GPU"
 
-        cleaned_input = clean_gpu_name(gpu_name)
-        upgrades = []
+    cleaned_input = clean_gpu_name(gpu_name)
+    upgrades = []
 
-        for gpu in gpu_upgrades:
-            if clean_gpu_name(gpu) in cleaned_input or cleaned_input in clean_gpu_name(gpu):
-                upgrades = gpu_upgrades[gpu]
-                break
+    for gpu in gpu_upgrades:
+        if clean_gpu_name(gpu) in cleaned_input or cleaned_input in clean_gpu_name(gpu):
+            upgrades = gpu_upgrades[gpu]
+            break
 
-    else:
-        result = "CPU bottleneck"
-        recommendation_type = "CPU"
+else:
+    result = "CPU bottleneck"
+    recommendation_type = "CPU"
 
-        cleaned_input = clean_cpu_name(cpu_name)
-        upgrades = []
+    cleaned_input = clean_cpu_name(cpu_name)
+    upgrades = []
 
-        for cpu in cpu_upgrades:
-            if clean_cpu_name(cpu) in cleaned_input or cleaned_input in clean_cpu_name(cpu):
-                upgrades = cpu_upgrades[cpu]
-                break
+    for cpu in cpu_upgrades:
+        if clean_cpu_name(cpu) in cleaned_input or cleaned_input in clean_cpu_name(cpu):
+            upgrades = cpu_upgrades[cpu]
+            break
 
     return jsonify({
         "result": result,
