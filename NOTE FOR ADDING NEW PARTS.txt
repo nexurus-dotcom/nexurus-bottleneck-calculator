@@ -1,0 +1,39 @@
+chatgpt convo
+
+
+
+
+At this point your flow is working:
+Bottleneck calculation
+        ↓
+JSON upgrade recommendation
+        ↓
+Shopify product search
+        ↓
+Filter bad products
+        ↓
+Show Nexurus products
+
+That means your original goal is achieved:
+
+"If I add new parts to my catalog later, will the calculator automatically recommend them?"
+
+Yes, with one important note:
+
+If you add a new product that matches an existing upgrade name in your JSON, it will automatically appear.
+If you add a completely new CPU/GPU model, you still need to add it to your Python JSON upgrade database so the calculator knows what upgrades to recommend.
+
+Example:
+
+You add:
+
+RTX 5070 Super
+
+You would need to add:
+
+"RTX 5070 Super": [
+    "RTX 5080",
+    "RTX 5090"
+]
+
+But you do not need to touch the Shopify JavaScript again.
