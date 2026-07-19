@@ -1,64 +1,64 @@
 cpu_upgrades = {
-    "Ryzen 5 3600": [
-        "Ryzen 5 5600",
-        "Ryzen 7 5700X3D",
-        "Ryzen 7 5800X3D"
+    "AMD Ryzen 5 3600": [
+        "AMD Ryzen 5 5600",
+        "AMD Ryzen 7 5700X3D",
+        "AMD Ryzen 7 5800X3D"
     ],
 
-    "Ryzen 5 5600": [
-        "Ryzen 7 5700X3D",
-        "Ryzen 7 5800X3D",
-        "Ryzen 7 7800X3D"
+    "AMD Ryzen 5 5600": [
+        "AMD Ryzen 7 5700X3D",
+        "AMD Ryzen 7 5800X3D",
+        "AMD Ryzen 7 7800X3D"
     ],
 
-    "Ryzen 5 7600": [
-        "Ryzen 7 7700X",
-        "Ryzen 7 7800X3D",
-        "Ryzen 9 7900X3D"
+    "AMD Ryzen 5 7600": [
+        "AMD Ryzen 7 7700X",
+        "AMD Ryzen 7 7800X3D",
+        "AMD Ryzen 9 7900X3D"
     ],
 
-    "Ryzen 7 5800X": [
-        "Ryzen 7 5800X3D",
-        "Ryzen 7 7800X3D"
+    "AMD Ryzen 7 5800X": [
+        "AMD Ryzen 7 5800X3D",
+        "AMD Ryzen 7 7800X3D"
     ],
 
-    "Ryzen 7 5800X3D": [
-        "Ryzen 7 7800X3D",
-        "Ryzen 7 9800X3D"
+    "AMD Ryzen 7 5800X3D": [
+        "AMD Ryzen 7 7800X3D",
+        "AMD Ryzen 7 9800X3D"
     ],
 
-    "Ryzen 7 7700X": [
-        "Ryzen 7 7800X3D",
-        "Ryzen 7 9800X3D",
-        "Ryzen 9 9900X3D"
+    "AMD Ryzen 7 7700X": [
+        "AMD Ryzen 7 7800X3D",
+        "AMD Ryzen 7 9800X3D",
+        "AMD Ryzen 9 9900X3D"
     ],
 
-    "Ryzen 7 7800X3D": [
-        "Ryzen 7 9800X3D",
-        "Ryzen 9 9900X3D"
+    "AMD Ryzen 7 7800X3D": [
+        "AMD Ryzen 7 9800X3D",
+        "AMD Ryzen 9 9900X3D"
     ],
 
-    "Core i5-12400F": [
-        "Core i5-13600K",
-        "Core i5-14600K",
-        "Core i7-14700K"
+    "Intel Core i5-12400F": [
+        "Intel Core i5-13600K",
+        "Intel Core i5-14600K",
+        "Intel Core i7-14700K"
     ],
 
-    "Core i5-12600K": [
-        "Core i5-14600K",
-        "Core i7-14700K",
-        "Core i7-14700KF"
+    "Intel Core i5-12600K": [
+        "Intel Core i5-14600K",
+        "Intel Core i7-14700K",
+        "Intel Core i7-14700KF"
     ],
 
-    "Core i5-13600K": [
-        "Core i7-14700K",
-        "Core i7-14700KF",
-        "Core i9-14900K"
+    "Intel Core i5-13600K": [
+        "Intel Core i7-14700K",
+        "Intel Core i7-14700KF",
+        "Intel Core i9-14900K"
     ],
 
-    "Core i7-13700K": [
-        "Core i7-14700K",
-        "Core i9-14900K"
+    "Intel Core i7-13700K": [
+        "Intel Core i7-14700K",
+        "Intel Core i9-14900K"
     ]
 }
 
@@ -81,30 +81,30 @@ gpu_upgrades = {
     "NVIDIA GTX 1650": [
         "NVIDIA RTX 3050",
         "NVIDIA RTX 4060",
-        "NVIDIA RTX 4060 Ti"
+        "NVIDIA RTX 4060 Ti 16GB"
     ],
 
     "NVIDIA GTX 1650 Super": [
         "NVIDIA RTX 3050",
         "NVIDIA RTX 4060",
-        "NVIDIA RTX 4060 Ti"
+        "NVIDIA RTX 4060 Ti 16GB"
     ],
 
     "NVIDIA RTX 2050": [
         "NVIDIA RTX 3050",
         "NVIDIA RTX 4060",
-        "NVIDIA RTX 4060 Ti"
+        "NVIDIA RTX 4060 Ti 16GB"
     ],
 
     "NVIDIA RTX 3050": [
         "NVIDIA RTX 4060",
-        "NVIDIA RTX 4060 Ti",
+        "NVIDIA RTX 4060 Ti 16GB",
         "NVIDIA RTX 5070"
     ],
 
     "NVIDIA RTX 4050": [
         "NVIDIA RTX 4060",
-        "NVIDIA RTX 4060 Ti",
+        "NVIDIA RTX 4060 Ti 16GB",
         "NVIDIA RTX 5070"
     ],
 
@@ -112,12 +112,12 @@ gpu_upgrades = {
 
     "NVIDIA RTX 3060 12GB": [
         "NVIDIA RTX 4060",
-        "NVIDIA RTX 4060 Ti",
+        "NVIDIA RTX 4060 Ti 16GB",
         "NVIDIA RTX 5070"
     ],
 
     "NVIDIA RTX 3060 Ti": [
-        "NVIDIA RTX 4060 Ti",
+        "NVIDIA RTX 4060 Ti 16GB",
         "NVIDIA RTX 5070",
         "NVIDIA RTX 5070 Ti"
     ],
@@ -148,7 +148,7 @@ gpu_upgrades = {
     # ===== 40 SERIES =====
 
     "NVIDIA RTX 4060": [
-        "NVIDIA RTX 4060 Ti",
+        "NVIDIA RTX 4060 Ti 16GB",
         "NVIDIA RTX 5070",
         "NVIDIA RTX 5070 Ti"
     ],
